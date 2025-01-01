@@ -17,10 +17,6 @@ def color(r,g,b,brightness=255):
     if device is None:
         raise ValueError("Device not found. Ensure the CP is connected and powered on.")
 
-    # Set up the device
-    # if device.is_kernel_driver_active(0):
-    #     device.detach_kernel_driver(0)
-
     device.set_configuration()
     cfg = device.get_active_configuration()
     interface = cfg[(2, 0)] #this works for some reason
@@ -58,12 +54,8 @@ def color(r,g,b,brightness=255):
         except usb.core.USBError as e:
             print(f"Error sending data: {e}")
 
-    # Example: Change LED 5 to purple
     for i in range(10): change_led_color(i, r, g, b,brightness)
     usb.util.dispose_resources(device)
-
-        #response = in_endpoint.read(64, timeout=3000)  # Adjust timeout as needed
-        #print(respone)
 
 # Define a route
 @app.route('/')
